@@ -41,9 +41,8 @@ OpenSSHd 7.2p2 - Username Enumeration             | exploits/linux/remote/40113.
 
 This version of OpenSSH appears vulnerable.  The weakness is that for some configurations, this SSH server will respond with a 'permission denied' error faster for an invalid user than it will for a legitimate one.  So you can try to attack the target machine with a user list and potentially enumerate some valid users for the machine.
 I tried the above exploits from exploit-db.com a number of times without success but then found it was in metasploit and included a 'CHECK_FALSE' option which checks for false positives by sending a few completely random usernames.  This test proved that the exploit wasn't working, time to move on.
-Inline-style:
+
 ![alt text](https://raw.githubusercontent.com/imp0ster-net/htb/master/help/img/00_help_msf-ssh-enumusers.png "nmap scan")
-("https://raw.githubusercontent.com/imp0ster-net/htb/master/help/img/00_help_msf-ssh-enumusers.png")
 
 ### HelpDeskZ
 
