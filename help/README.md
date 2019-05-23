@@ -47,10 +47,12 @@ I tried the above exploits from exploit-db.com a number of times without success
 ### HelpDeskZ
 
 Opening the box in a browser shows a default install of apache 2 for Ubuntu.  There was nothing noticeable here of interest and no /robots.txt file so I ran dirbuster with the small directory list.
+
 ![alt text](https://github.com/imp0ster-net/htb/blob/master/help/img/01_help_dirbuster-settings.png "dirbuster settings")
 ![alt text](https://github.com/imp0ster-net/htb/blob/master/help/img/02_help_dirbuster-results.png "dirbuster results")
 
 This quickly listed the /support directory which revealed the HelpDeskZ app, clearly the namesake of the box.
+
 ![alt text](https://github.com/imp0ster-net/htb/blob/master/help/img/03_help_helpdeskz-index.png "HelpDeskZ")
 
 I played around with it for a little while to see if there was a way of injecting SQL or system commands into any of the input fields but I couldn't find any way of doing so.
