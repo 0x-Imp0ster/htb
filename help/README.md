@@ -46,7 +46,7 @@ I tried the above exploits from exploit-db.com a number of times without success
 
 ### HelpDeskZ
 
-Opening the box in a browser shows a default install of apache 2 for Ubuntu, nothing noticeable and there's no /robots.txt so I ran dirbuster with the small directory list.
+Opening the box in a browser shows a default install of apache 2 for Ubuntu.  There was nothing noticeable here of interest and no /robots.txt file so I ran dirbuster with the small directory list.
 ![alt text](https://github.com/imp0ster-net/htb/blob/master/help/img/01_help_dirbuster-settings.png "dirbuster settings")
 ![alt text](https://github.com/imp0ster-net/htb/blob/master/help/img/02_help_dirbuster-results.png "dirbuster results")
 
