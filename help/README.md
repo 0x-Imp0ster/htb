@@ -131,6 +131,7 @@ http://10.10.10.121/support/uploads/tickets/fc7240781f3464afcebb47bd8da49b9a.php
 ```
 
 Now I had a reverse shell through netcat from which I went straight for the user flag
+
 ![alt text](https://github.com/imp0ster-net/htb/blob/master/help/img/04_help_nc-shell.png "netcat shell")
 ![alt text](https://github.com/imp0ster-net/htb/blob/master/help/img/05_help_nc-commands.png "user flag")
 
