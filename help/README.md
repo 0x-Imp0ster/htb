@@ -47,13 +47,15 @@ I tried the above exploits from exploit-db.com a number of times without success
 ### HelpDeskZ
 
 Opening the box in a browser shows a default install of apache 2 for Ubuntu, nothing noticeable and there's no /robots.txt so I ran dirbuster with the small directory list.
-("https://raw.githubusercontent.com/imp0ster-net/htb/master/help/img/01_help_dirbuster-settings.png?token=ALU73KG6V2NMHANPAIOVUSK444V6O")
-("https://raw.githubusercontent.com/imp0ster-net/htb/master/help/img/02_help_dirbuster-results.png?token=ALU73KBUACI5O7NU3KKKU6S444V7M")
-This quickly listed the /support directory which revealed the HelpDeskZ app, which being the namesake of the box probably means it's the right track.
-("https://raw.githubusercontent.com/imp0ster-net/htb/master/help/img/03_help_helpdeskz-index.png?token=ALU73KEAC5ZVELKIEWSDF3C444WAI")
+![alt text](https://github.com/imp0ster-net/htb/blob/master/help/img/01_help_dirbuster-settings.png "dirbuster settings")
+![alt text](https://github.com/imp0ster-net/htb/blob/master/help/img/02_help_dirbuster-results.png "dirbuster results")
 
-I played around with it for a little while to see if there was a way of injecting SQL or commands into any of the input fields but I couldn't find any way of doing so.
-I checked searchsploit again.  
+This quickly listed the /support directory which revealed the HelpDeskZ app, clearly the namesake of the box.
+![alt text](https://github.com/imp0ster-net/htb/blob/master/help/img/03_help_helpdeskz-index.png "HelpDeskZ")
+
+I played around with it for a little while to see if there was a way of injecting SQL or system commands into any of the input fields but I couldn't find any way of doing so.
+
+I checked searchsploit again.
 
 ```
 root@kali:~# searchsploit helpdeskz
@@ -68,6 +70,7 @@ Shellcodes: No Result
 ```
 
 There were two results, one with 'authorized' in the title which wouldn't help us right now and another one called 'Arbitrary File Upload'.
+
 It turns out that HelpDeskZ allows you to upload PHP files using the support ticket page.  When you upload a PHP file it does tell you that this file type is not allowed, suggesting the upload failed.  However, it still saves the file on the server.  The software renames the file to an md5 hash of the filename and current time as you can see in the source code below.  This means that you can still access and so run the uploaded PHP file, if you can find out the new filename and where it is located.
 
 The first time around I skim read the python script which states you just upload a PHP shell and run the script with the *base url* of the HelpDeskZ install and the name of your PHP shell.
@@ -96,26 +99,24 @@ After this the exploit still failed.
 
 So I read the exploit script *again*.  In the description it has a link to the HelpDeskZ source code file that contains the vulnerability so I checked that out on [github](https://github.com/evolutionscript/HelpDeskZ-1.0) and here I found out the path that files are uploaded to; this needs to included in the first parameter of the exploit.
 
-https://github.com/evolutionscript/HelpDeskZ-1.0/blob/master/controllers/submit_ticket_controller.php
-```
-HelpDeskZ-1.0/controllers/submit_ticket_controller.php
-```
+##### HelpDeskZ-1.0/controllers/submit_ticket_controller.php
+*https://github.com/evolutionscript/HelpDeskZ-1.0/blob/master/controllers/submit_ticket_controller.php*
 <pre>
 137   if(!isset($error_msg) && $settings['ticket_attachment']==1){
-138     <em>$uploaddir = UPLOAD_DIR.'tickets/';</em>
+138     <em><b><u>$uploaddir = UPLOAD_DIR.'tickets/';</u></b></em>
 139     if($_FILES['attachment']['error'] == 0){
 140     $ext = pathinfo($_FILES['attachment']['name'], PATHINFO_EXTENSION);
-141     <em>$filename = md5($_FILES['attachment']['name'].time()).".".$ext;</em>
+141     <em><b><u>$filename = md5($_FILES['attachment']['name'].time()).".".$ext;</u></b></em>
 142     $fileuploaded[] = array('name' => $_FILES['attachment']['name'],
 143     'enc' => $filename,
 144     'size' => formatBytes($_FILES['attachment']['size']),
 145     'filetype' => $_FILES['attachment']['type']);
 146     $uploadedfile = $uploaddir.$filename;
-</pre>
-__
+</pre>__
 
-https://github.com/evolutionscript/HelpDeskZ-1.0/blob/master/includes/global.php
-```HelpDeskZ-1.0/includes/global.php
+##### HelpDeskZ-1.0/includes/global.php
+*https://github.com/evolutionscript/HelpDeskZ-1.0/blob/master/includes/global.php*
+```
 18   define('UPLOAD_DIR', ROOTPATH . 'uploads/');
 ```
 
@@ -128,8 +129,8 @@ http://10.10.10.121/support/uploads/tickets/fc7240781f3464afcebb47bd8da49b9a.php
 ```
 
 Now I had a reverse shell through netcat from which I went straight for the user flag
-("https://raw.githubusercontent.com/imp0ster-net/htb/master/help/img/04_help_nc-shell.png?token=ALU73KEOLKBXENSFPHRVJIC444WA4")
-("https://raw.githubusercontent.com/imp0ster-net/htb/master/help/img/05_help_nc-commands.png?token=ALU73KDOMVHBFDGLP5A5ZEK444WB6")
+![alt text](https://github.com/imp0ster-net/htb/blob/master/help/img/04_help_nc-shell.png "netcat shell")
+![alt text](https://github.com/imp0ster-net/htb/blob/master/help/img/05_help_nc-commands.png "user flag")
 
 ### Escalate
 
