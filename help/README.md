@@ -76,6 +76,7 @@ There were two results, one with 'authorized' in the title which wouldn't help u
 It turns out that HelpDeskZ allows you to upload PHP files using the support ticket page.  When you upload a PHP file it does tell you that this file type is not allowed, suggesting the upload failed.  However, it still saves the file on the server.  The software renames the file to an md5 hash of the filename and current time as you can see in the source code below.  This means that you can still access and so run the uploaded PHP file, if you can find out the new filename and where it is located.
 
 The first time around I skim read the python script which states you just upload a PHP shell and run the script with the *base url* of the HelpDeskZ install and the name of your PHP shell.
+
 *I used this PHP reverse shell from pentestmonkey: (http://pentestmonkey.net/tools/web-shells/php-reverse-shell) and set up a netcat listener*
 ```
 root@kali:~/htb/help# python exploit.py http://10.10.10.121/support/ rshell.php
