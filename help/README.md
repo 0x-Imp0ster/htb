@@ -211,4 +211,4 @@ b7fe608***************0d9daddb98
 
 Thanks for reading and thanks to [cymtrick](https://www.hackthebox.eu/home/users/profile/3079) for creating the box.
 
-Please feel free to [email]("mailto://htb@imp0ster.net") any comments, tips, criticisms.
+Please feel free to [email](mailto:htb@imp0ster.net) any comments, tips, criticisms.
