@@ -87,14 +87,14 @@ This didn't work so I read the script again and thought about why the current ti
 I reloaded the page in firefox and checked the response headers and saw that the time was behind mine but not by a round number of hours suggesting it wasn't just in a different time zone.
 I went down a little rabbit hole and made a [python script](https://github.com/imp0ster-net/htb/blob/master/help/timesync.py) to sync my local system time with that of the webserver.
 
-```
+<pre>
 root@kali:~/htb/help# python timesync.py
 Original system date:
 Wed 22 May <b><u>18:37:33</u></b> UTC 2019
 HELP Datetime: 2019-05-22 <b><u>18:28:01</u></b>
 new system date:
 Wed 22 May <b><u>18:28:01</u></b> UTC 2019
-```
+</pre>
 
 *After changing the local system time, it would revert back within a few seconds, even after disabling any kind of NTP daemon and service I could find!  I finally tracked it down to the Guest Additions of VirtualBox being too <helpful> so after disabling* `vboxadd-service` *the time change stuck.*
 
