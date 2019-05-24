@@ -77,7 +77,7 @@ It turns out that HelpDeskZ allows you to upload PHP files using the support tic
 
 The first time around I skim read the python script which states you just upload a PHP shell and run the script with the *base url* of the HelpDeskZ install and the name of your PHP shell.
 
-*I used this PHP reverse shell from pentestmonkey: (http://pentestmonkey.net/tools/web-shells/php-reverse-shell) and set up a netcat listener*
+I used this PHP reverse shell from pentestmonkey: *(http://pentestmonkey.net/tools/web-shells/php-reverse-shell)* and set up a netcat listener
 ```
 root@kali:~/htb/help# python exploit.py http://10.10.10.121/support/ rshell.php
 Helpdeskz v1.0.2 - Unauthenticated shell upload exploit
