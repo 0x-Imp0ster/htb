@@ -96,7 +96,7 @@ new system date:
 Wed 22 May <b><u>18:28:01</u></b> UTC 2019
 </pre>
 
-*After changing the local system time, it would revert back within a few seconds, even after disabling any kind of NTP daemon and service I could find!  I finally tracked it down to the Guest Additions of VirtualBox being too <helpful> so after disabling* `vboxadd-service` *the time change stuck.*
+*[After changing the local system time, it would revert back within a few seconds, even after disabling any kind of NTP daemon and service I could find!  I finally tracked it down to the Guest Additions of VirtualBox being too 'helpful'. After disabling* `vboxadd-service` *the time change stuck.]*
 
 After this the exploit still failed.
 
